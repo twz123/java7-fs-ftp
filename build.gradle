@@ -92,9 +92,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
  * automatically...
  */
 
-javadoc {
+/*javadoc {
     options.overview = "src/main/java/overview.html";
-}
+}*/
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = "javadoc";
