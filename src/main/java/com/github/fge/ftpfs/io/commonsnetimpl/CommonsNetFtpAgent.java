@@ -156,6 +156,11 @@ public final class CommonsNetFtpAgent
             if (!ftpClient.login(cfg.getUsername(), cfg.getPassword()))
                 throw new IOException("cannot login to server (server reply: "
                     + ftpClient.getReplyCode());
+            if (cfg.isPassive()) {
+                ftpClient.enterLocalPassiveMode();
+            } else {
+                ftpClient.enterLocalActiveMode();
+            }
         } catch (FTPConnectionClosedException e) {
             status = Status.DEAD;
             throw new IOException("service unavailable", e);

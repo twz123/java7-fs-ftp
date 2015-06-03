@@ -97,11 +97,19 @@ public final class FtpFileSystemProvider
 
         final String username = params.get("username");
         final String password = params.get("password");
+        final String passive = params.get("passive");
 
         if (username != null)
             builder.setUsername(username);
         if (password != null)
             builder.setPassword(password);
+        if (passive != null) {
+            if (Boolean.parseBoolean(passive)) {
+                builder.usePassiveMode();
+            } else {
+                builder.useActiveMode();
+            }
+        }
 
         final FtpConfiguration cfg = builder.build();
 

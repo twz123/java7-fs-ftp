@@ -31,6 +31,7 @@ public final class FtpConfiguration
     private final int port;
     private final String username;
     private final String password;
+    private final boolean passive;
 
     public static Builder newBuilder()
     {
@@ -43,6 +44,7 @@ public final class FtpConfiguration
         port = builder.port;
         username = builder.username;
         password = builder.password;
+        passive = builder.passive;
     }
 
     public String getHostname()
@@ -65,6 +67,11 @@ public final class FtpConfiguration
         return password;
     }
 
+    public boolean isPassive()
+    {
+        return passive;
+    }
+
     public static final class Builder
     {
         private static final int MIN_PORT = 0;
@@ -75,6 +82,7 @@ public final class FtpConfiguration
         private String username = "anonymous";
         // lftp sends lftp@ as a password and it works pretty well, so...
         private String password = "java7fsftp@";
+        private boolean passive;
 
         private Builder()
         {
@@ -107,6 +115,18 @@ public final class FtpConfiguration
         {
             this.password = Objects.requireNonNull(password,
                 "password cannot be null");
+            return this;
+        }
+
+        public Builder useActiveMode()
+        {
+            this.passive = false;
+            return this;
+        }
+
+        public Builder usePassiveMode()
+        {
+            this.passive = true;
             return this;
         }
 

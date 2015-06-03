@@ -52,7 +52,6 @@ Here is what is NOT implemented:
 * write access;
 * subpath support (ie, accessing `ftp://foo.bar/somewhere/else/than/root`);
 * `SeekableByteChannel` support (although that probably makes no sense for FTP at all);
-* choice of passive versus active for data channels.
 
 Also, the code lacks documentation and tests.
 
